@@ -134,6 +134,7 @@ fn new_project(name: &str) -> Result<()> {
 name = "{}"
 version = "0.1.0"
 backend = ""
+extension = ""
 authors = ["your name <your email>"]
 
 [plugins]

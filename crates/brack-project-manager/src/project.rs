@@ -141,7 +141,7 @@ impl Project {
                 let gen = brack_codegen::generate::generate(&expanded, &mut plugins)?;
                 std::fs::create_dir_all("out")?;
                 std::fs::write(
-                    format!("out/{}.{}", file_stem, self.config.document.backend),
+                    format!("out/{}.{}", file_stem, self.config.document.extension),
                     gen,
                 )?;
             }
