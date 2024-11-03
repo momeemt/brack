@@ -11,14 +11,10 @@ impl Server {
         &self,
         param: DidSaveTextDocumentParams,
     ) -> Result<()> {
-        let file_path = param
+        let uri = param
             .text_document
             .uri
-            .to_file_path()
-            .map_err(|_| anyhow::anyhow!("Invalid file path"))?;
-        let uri = file_path
-            .to_str()
-            .ok_or_else(|| anyhow::anyhow!("Invalid file path"))?;
+            .as_str();
 
         let tokens = match tokenize(uri) {
             Ok(tokens) => tokens,

@@ -2,17 +2,18 @@ use crate::server::Server;
 use anyhow::Result;
 use brack_project_manager::project::Project;
 use lsp_types::DidOpenTextDocumentParams;
+use std::path::Path;
 
 impl Server {
     pub(crate) async fn handle_text_document_did_open(
         &mut self,
         params: DidOpenTextDocumentParams,
     ) -> Result<()> {
-        let file_path = params
+        let file_path_str = params
             .text_document
             .uri
-            .to_file_path()
-            .map_err(|_| anyhow::anyhow!("Invalid file path"))?;
+            .as_str();
+        let file_path = Path::new(file_path_str);
 
         // root/docs/file.[] -> root
         let root = file_path
