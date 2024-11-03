@@ -11,10 +11,7 @@ impl Server {
         &self,
         param: DidSaveTextDocumentParams,
     ) -> Result<()> {
-        let uri = param
-            .text_document
-            .uri
-            .as_str();
+        let uri = param.text_document.uri.as_str();
 
         let tokens = match tokenize(uri) {
             Ok(tokens) => tokens,

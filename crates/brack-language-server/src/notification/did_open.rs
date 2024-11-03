@@ -9,10 +9,7 @@ impl Server {
         &mut self,
         params: DidOpenTextDocumentParams,
     ) -> Result<()> {
-        let file_path_str = params
-            .text_document
-            .uri
-            .as_str();
+        let file_path_str = params.text_document.uri.as_str();
         let file_path = Path::new(file_path_str);
 
         // root/docs/file.[] -> root
