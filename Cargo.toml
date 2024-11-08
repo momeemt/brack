@@ -41,7 +41,7 @@ members = [
     "crates/brack-language-server",
     "crates/brack-parser",
     "crates/brack-plugin",
-    "crates/brack-project-manager",
+    "crates/brack-project-manager", "crates/brack-release",
     "crates/brack-tokenizer",
     "crates/brack-transformer",
 ]
