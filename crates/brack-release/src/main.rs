@@ -1,6 +1,6 @@
 use std::fs::read_to_string;
 use std::path::Path;
-use toml_edit::{DocumentMut, value};
+use toml_edit::{value, DocumentMut};
 
 use anyhow::Result;
 use clap::{Parser, Subcommand, ValueEnum};
@@ -17,6 +17,7 @@ struct Args {
 #[derive(Debug, Subcommand)]
 enum SubCommands {
     Update { semver_kind: SemVerKind },
+    DebugUpdate { version: String },
 }
 
 #[derive(Debug, Clone, ValueEnum)]
@@ -47,6 +48,25 @@ fn rewrite_version<P: AsRef<Path> + Copy>(path: P, version: &SemVer) -> Result<(
     Ok(())
 }
 
+fn rewrite_all_cargo_toml(next_version: &SemVer) -> Result<()> {
+    let cargo_toml_paths = [
+        "Cargo.toml",
+        "crates/brack-codegen/Cargo.toml",
+        "crates/brack-expander/Cargo.toml",
+        "crates/brack-language-server/Cargo.toml",
+        "crates/brack-parser/Cargo.toml",
+        "crates/brack-plugin/Cargo.toml",
+        "crates/brack-plugin/Cargo.toml",
+        "crates/brack-project-manager/Cargo.toml",
+        "crates/brack-tokenizer/Cargo.toml",
+        "crates/brack-transformer/Cargo.toml",
+    ];
+    for path in cargo_toml_paths.iter() {
+        rewrite_version(path, &next_version)?;
+    }
+    Ok(())
+}
+
 fn main() -> Result<()> {
     let args = Args::parse();
     match args.sub_commands {
@@ -59,22 +79,12 @@ fn main() -> Result<()> {
                 SemVerKind::Patch => current_version.next_patch(),
             };
             println!("Next version: {}", next_version);
-            let cargo_toml_paths = [
-                "Cargo.toml",
-                "crates/brack-codegen/Cargo.toml",
-                "crates/brack-expander/Cargo.toml",
-                "crates/brack-language-server/Cargo.toml",
-                "crates/brack-parser/Cargo.toml",
-                "crates/brack-plugin/Cargo.toml",
-                "crates/brack-plugin/Cargo.toml",
-                "crates/brack-project-manager/Cargo.toml",
-                "crates/brack-tokenizer/Cargo.toml",
-                "crates/brack-transformer/Cargo.toml",
-            ];
-            for path in cargo_toml_paths.iter() {
-                rewrite_version(path, &next_version)?;
-            }
-        }
+            rewrite_all_cargo_toml(&next_version)?;
+        },
+        SubCommands::DebugUpdate { version } => {
+            let next_version = SemVer::new_with_string(&version)?;
+            rewrite_all_cargo_toml(&next_version)?;
+        },
     }
     Ok(())
 }
