@@ -202,7 +202,7 @@ dependencies = [
 
 [[package]]
 name = "brack"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "anyhow",
  "brack-codegen",
@@ -221,11 +221,12 @@ dependencies = [
  "serde_json",
  "tokio",
  "toml",
+ "toml_edit",
 ]
 
 [[package]]
 name = "brack-codegen"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "anyhow",
  "brack-parser",
@@ -235,7 +236,7 @@ dependencies = [
 
 [[package]]
 name = "brack-expander"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "anyhow",
  "brack-parser",
@@ -245,7 +246,7 @@ dependencies = [
 
 [[package]]
 name = "brack-language-server"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "anyhow",
  "brack-parser",
@@ -261,7 +262,7 @@ dependencies = [
 
 [[package]]
 name = "brack-parser"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "anyhow",
  "brack-tokenizer",
@@ -273,7 +274,7 @@ dependencies = [
 
 [[package]]
 name = "brack-plugin"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "anyhow",
  "brack-transformer",
@@ -285,7 +286,7 @@ dependencies = [
 
 [[package]]
 name = "brack-project-manager"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "anyhow",
  "brack-codegen",
@@ -306,10 +307,14 @@ dependencies = [
 [[package]]
 name = "brack-release"
 version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "clap",
+]
 
 [[package]]
 name = "brack-tokenizer"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "anyhow",
  "pretty_assertions",
@@ -319,7 +324,7 @@ dependencies = [
 
 [[package]]
 name = "brack-transformer"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "anyhow",
  "brack-parser",
@@ -2564,9 +2569,9 @@ dependencies = [
 
 [[package]]
 name = "toml_edit"
-version = "0.22.20"
+version = "0.22.22"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "583c44c02ad26b0c3f3066fe629275e50627026c51ac2e595cca4c230ce1ce1d"
+checksum = "4ae48d6208a266e853d946088ed816055e556cc6028c5e8e2b84d9fa5dd7c7f5"
 dependencies = [
  "indexmap",
  "serde",
