@@ -5,8 +5,8 @@ use toml_edit::{value, DocumentMut};
 use anyhow::Result;
 use clap::{Parser, Subcommand, ValueEnum};
 
-mod semver;
 mod release_note;
+mod semver;
 use crate::semver::SemVer;
 
 #[derive(Parser, Debug)]
@@ -83,14 +83,14 @@ async fn main() -> Result<()> {
             };
             println!("Next version: {}", next_version);
             rewrite_all_cargo_toml(&next_version)?;
-        },
+        }
         SubCommands::DebugUpdate { version } => {
             let next_version = SemVer::new_with_string(&version)?;
             rewrite_all_cargo_toml(&next_version)?;
-        },
+        }
         SubCommands::ReleaseNote => {
             release_note::get_release_note().await?;
-        },
+        }
     }
     Ok(())
 }
