@@ -21,6 +21,7 @@ regex = "1.11.1"
 serde_json = "1.0.132"
 serde = { version = "1.0.214", features = ["derive"] }
 toml_edit = "0.22.22"
+octocrab = "0.41.2"
 
 [dependencies.clap]
 version = "4.5.7"
