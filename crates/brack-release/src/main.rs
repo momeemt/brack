@@ -6,6 +6,7 @@ use anyhow::Result;
 use clap::{Parser, Subcommand, ValueEnum};
 
 mod semver;
+mod release_note;
 use crate::semver::SemVer;
 
 #[derive(Parser, Debug)]
@@ -18,6 +19,7 @@ struct Args {
 enum SubCommands {
     Update { semver_kind: SemVerKind },
     DebugUpdate { version: String },
+    ReleaseNote,
 }
 
 #[derive(Debug, Clone, ValueEnum)]
@@ -67,7 +69,8 @@ fn rewrite_all_cargo_toml(next_version: &SemVer) -> Result<()> {
     Ok(())
 }
 
-fn main() -> Result<()> {
+#[tokio::main]
+async fn main() -> Result<()> {
     let args = Args::parse();
     match args.sub_commands {
         SubCommands::Update { semver_kind } => {
@@ -84,6 +87,9 @@ fn main() -> Result<()> {
         SubCommands::DebugUpdate { version } => {
             let next_version = SemVer::new_with_string(&version)?;
             rewrite_all_cargo_toml(&next_version)?;
+        },
+        SubCommands::ReleaseNote => {
+            release_note::get_release_note().await?;
         },
     }
     Ok(())
