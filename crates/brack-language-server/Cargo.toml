@@ -8,7 +8,7 @@ edition = "2021"
 [dependencies]
 anyhow = "1.0.93"
 serde = "1.0.215"
-serde_json = "1.0.117"
+serde_json = "1.0.133"
 tokio = { version = "1", features = ["full"] }
 lsp-types = "0.97"
 brack-parser = { git = "https://github.com/brack-lang/brack", package = "brack-parser" }
