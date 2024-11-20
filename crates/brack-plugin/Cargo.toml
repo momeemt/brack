@@ -11,5 +11,5 @@ brack-transformer = { git = "https://github.com/brack-lang/brack", package = "br
 extism = "1.8.0"
 serde = { version = "1.0.215", features = ["derive"] }
 serde_json = "1.0.133"
-extism-convert = { version = "1.8.0" }
+extism-convert = { version = "1.9.0" }
 
