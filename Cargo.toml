@@ -15,7 +15,7 @@ brack-tokenizer = { git = "https://github.com/brack-lang/brack", package = "brac
 brack-transformer = { git = "https://github.com/brack-lang/brack", package = "brack-transformer" }
 tokio = { version = "1", features = ["full"] }
 toml = "0.8.14"
-extism = "1.8.0"
+extism = "1.9.0"
 reqwest = "0.12.9"
 regex = "1.11.1"
 serde_json = "1.0.133"
