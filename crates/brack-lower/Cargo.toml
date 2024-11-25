@@ -1,0 +1,10 @@
+[package]
+name = "brack-lower"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+anyhow = "1.0.93"
+brack-parser = { git = "https://github.com/brack-lang/brack", package = "brack-parser" }
+brack-plugin = { git = "https://github.com/brack-lang/brack", package = "brack-plugin" }
+brack-transformer = { git = "https://github.com/brack-lang/brack", package = "brack-transformer" }
