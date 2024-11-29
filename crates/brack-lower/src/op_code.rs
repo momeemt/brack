@@ -1,7 +1,8 @@
 use brack_plugin::types::Type;
 pub enum OpCode {
     ToArray(usize),
-    ToOption,
+    ToOption(Option<()>),
+    Join(usize),
     Call {
         plugin_name: String,
         function_name: String,

@@ -9,10 +9,10 @@ use crate::{plugin::Plugin, types::Type, value::Value};
 
 pub struct Plugins {
     pub name_to_plugin: HashMap<String, Plugin>,
-    document_hook_plugin_name: Option<String>,
-    stmt_hook_plugin_name: Option<String>,
-    expr_hook_plugin_name: Option<String>,
-    text_hook_plugin_name: Option<String>,
+    pub document_hook_plugin_name: Option<String>,
+    pub stmt_hook_plugin_name: Option<String>,
+    pub expr_hook_plugin_name: Option<String>,
+    pub text_hook_plugin_name: Option<String>,
 }
 
 impl Plugins {
@@ -175,4 +175,5 @@ impl Plugins {
         }
         Ok(None)
     }
+
 }
