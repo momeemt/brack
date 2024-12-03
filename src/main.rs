@@ -27,12 +27,12 @@ pub fn compile<P: AsRef<std::path::Path>>(path: P, plugins_dir_path: P) -> Resul
         );
         if let Some(capture) = capture {
             let module_name = capture.name("module_name").unwrap().as_str();
-            pathes.insert(module_name.to_string(), (path, FeatureFlag::default()));
+            paths.insert(module_name.to_string(), (path, FeatureFlag::default()));
         }
     }
 
     let mut plugin_vec = vec![];
-    for (name, (path, feature_flag)) in pathes {
+    for (name, (path, feature_flag)) in paths {
         let plugin = Plugin::new(&name, path, feature_flag)?;
         plugin_vec.push(plugin);
     }
