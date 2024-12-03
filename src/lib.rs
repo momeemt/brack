@@ -1,2 +1,2 @@
-pub mod sub_commands;
 pub mod compile;
+pub mod sub_commands;
