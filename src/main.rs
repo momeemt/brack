@@ -17,7 +17,7 @@ pub fn compile<P: AsRef<std::path::Path>>(path: P, plugins_dir_path: P) -> Resul
     let plugins_dir_path = plugins_dir_path.as_ref();
     let pattern = Regex::new(r"(?<module_name>[[:alpha:]]+)_[[:alnum:]]+.wasm").unwrap();
     let entries = std::fs::read_dir(plugins_dir_path)?;
-    let mut pathes = HashMap::new();
+    let mut paths = HashMap::new();
     for entry in entries {
         let entry = entry?;
         let path = entry.path();
