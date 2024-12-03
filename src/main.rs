@@ -37,7 +37,7 @@ pub fn compile<P: AsRef<std::path::Path>>(path: P, plugins_dir_path: P) -> Resul
     }
     let mut plugins = Plugins::new(plugin_vec)?;
 
-    let tokens = brack_tokenizer::tokenize::tokenize(&path)?;
+    let tokens = brack_tokenizer::tokenize::tokenize(path)?;
     let cst = brack_parser::parse::parse(&tokens)?;
     let (ast, _errors) = brack_transformer::transform::transform(&cst);
     let expanded_ast = brack_expander::expand::expander(&ast, &mut plugins)?;
