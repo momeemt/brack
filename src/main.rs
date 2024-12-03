@@ -21,10 +21,9 @@ pub fn compile<P: AsRef<std::path::Path>>(path: P, plugins_dir_path: P) -> Resul
     for entry in entries {
         let entry = entry?;
         let path = entry.path();
-        let capture = pattern.captures(
-            path.to_str()
-                .ok_or_else(|| anyhow::anyhow!("Could not convert file name to string: {}", path.display()))?,
-        );
+        let capture = pattern.captures(path.to_str().ok_or_else(|| {
+            anyhow::anyhow!("Could not convert file name to string: {}", path.display())
+        })?);
         if let Some(capture) = capture {
             let module_name = capture.name("module_name").unwrap().as_str();
             paths.insert(module_name.to_string(), (path, FeatureFlag::default()));
