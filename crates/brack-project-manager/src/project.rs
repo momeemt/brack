@@ -135,6 +135,7 @@ impl Project {
             .filter(|e| e.file_type().is_file());
         for entry in entries {
             let path = entry.path();
+            let relative_path = path.strip_prefix("docs")?;
             let file_stem = path
                 .file_stem()
                 .ok_or_else(|| anyhow::anyhow!("Could not get file name from path."))?
@@ -146,10 +147,13 @@ impl Project {
                 let (ast, _errors) = brack_transformer::transform::transform(&parsed);
                 let expanded = brack_expander::expand::expander(&ast, &mut plugins)?;
                 let gen = brack_codegen::generate::generate(&expanded, &mut plugins)?;
-                std::fs::create_dir_all("out")?;
-                let output_path = format!("out/{}.{}", file_stem, self.config.document.extension);
+                let output_dir = std::path::Path::new("out")
+                    .join(relative_path.parent().unwrap_or(std::path::Path::new("")));
+                std::fs::create_dir_all(&output_dir)?;
+                let output_path =
+                    output_dir.join(format!("{}.{}", file_stem, self.config.document.extension));
                 std::fs::write(&output_path, gen)?;
-                output_paths.push(output_path);
+                output_paths.push(output_path.to_string_lossy().to_string());
             }
         }
 
