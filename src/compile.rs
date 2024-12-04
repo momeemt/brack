@@ -3,8 +3,9 @@ use std::collections::HashMap;
 use anyhow::Result;
 use brack_plugin::{feature_flag::FeatureFlag, plugin::Plugin, plugins::Plugins};
 use regex::Regex;
+use std::path::Path;
 
-pub fn compile<P: AsRef<std::path::Path>>(path: P, plugins_dir_path: P) -> Result<String> {
+pub fn compile<P1: AsRef<Path>, P2: AsRef<Path>>(path: P1, plugins_dir_path: P2) -> Result<String> {
     let path = path.as_ref();
     let plugins_dir_path = plugins_dir_path.as_ref();
     let pattern = Regex::new(r"(?<module_name>[[:alpha:]]+)_[[:alnum:]]+.wasm").unwrap();
