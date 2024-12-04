@@ -127,7 +127,7 @@ impl Project {
             plugin_vec.push(Plugin::new(&name, path, feature_flag)?);
         }
         let mut plugins = Plugins::new(plugin_vec)?;
-        
+
         let mut output_paths = vec![];
         let entries = walkdir::WalkDir::new("docs")
             .into_iter()
